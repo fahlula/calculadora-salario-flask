@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - Calculadora de Salário Líquido</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado do Cálculo</h2>
+
+        <table class="table">
+            <tr>
+                <th>Salário Bruto</th>
+                <td>R$ {{ salario }}</td>
+            </tr>
+            <tr>
+                <th>Desconto INSS (8%)</th>
+                <td>- R$ {{ inss }}</td>
+            </tr>
+            <tr>
+                <th>Desconto IR (15% se > R$ 2.500,00)</th>
+                <td>{% if ir|float > 0 %}- R$ {{ ir }}{% else %}Isento{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Bônus Dependentes (R$ 200,00 x {{ dependentes }})</th>
+                <td>+ R$ {{ dependentes_total }}</td>
+            </tr>
+            <tr class="total">
+                <th>Salário Líquido</th>
+                <td>R$ {{ liquido }}</td>
+            </tr>
+        </table>
+
+        <div style="text-align: center;">
+            <a class="btn" href="/">Calcular novamente</a>
+        </div>
+    </div>
+</body>
+</html>
